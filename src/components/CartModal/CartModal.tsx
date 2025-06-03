@@ -19,16 +19,9 @@ import {
 import { type Product } from '../data/localData';
 import { useProducts } from '@/context/ProductsContext';
 
-
 const CartModal = () => {
-  const {
-    cartItems,
-    filteredProducts,
-    removeFromCart,
-    isCartOpen,
-    toggleCart,
-    updateQuantity
-  } = useProducts();
+  const { cartItems, filteredProducts, removeFromCart, isCartOpen, toggleCart, updateQuantity } =
+    useProducts();
 
   if (!isCartOpen) {
     return null;
@@ -40,10 +33,8 @@ const CartModal = () => {
 
   const total = cartItems.reduce((sum, cartItem) => {
     const product = getProductById(cartItem.productId);
-    return product ? sum + (product.price * cartItem.quantity) : sum;
+    return product ? sum + product.price * cartItem.quantity : sum;
   }, 0);
-
-
 
   return (
     <CartOverlay>
@@ -66,8 +57,7 @@ const CartModal = () => {
                   <ItemInfo>
                     <ItemName>{product.name}</ItemName>
                     <ItemPrice>
-                      {product.price} ₽ × {cartItem.quantity} = 
-                      {product.price * cartItem.quantity} ₽
+                      {product.price} ₽ × {cartItem.quantity} ={product.price * cartItem.quantity} ₽
                     </ItemPrice>
                     <QuantityControls>
                       <ControlButton
@@ -91,9 +81,7 @@ const CartModal = () => {
           )}
         </CartItems>
 
-        <CartTotal>
-          Итого: {total} ₽
-        </CartTotal>
+        <CartTotal>Итого: {total} ₽</CartTotal>
       </CartContainer>
     </CartOverlay>
   );

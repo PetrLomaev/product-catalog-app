@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useProducts } from '@/context/ProductsContext';
 import {
   QuantityContainer,
@@ -14,7 +14,6 @@ type AddToCartButtonProps = {
 };
 
 const AddToCardButton = ({ productId }: AddToCartButtonProps) => {
-
   const { cartItems, addToCart, updateQuantity, removeFromCart } = useProducts();
 
   const cartItem = cartItems.find((item) => item.productId === productId);
@@ -41,9 +40,7 @@ const AddToCardButton = ({ productId }: AddToCartButtonProps) => {
         <QuantityValue>{quantity}</QuantityValue>
         <ControlButton onClick={handleAdd}>+</ControlButton>
       </QuantityControls>
-      <RemoveButton onClick={() => removeFromCart(productId)}>
-        Удалить из корзины
-      </RemoveButton>
+      <RemoveButton onClick={() => removeFromCart(productId)}>Удалить из корзины</RemoveButton>
     </QuantityContainer>
   ) : (
     <AddButton onClick={handleAdd}>Добавить в корзину</AddButton>

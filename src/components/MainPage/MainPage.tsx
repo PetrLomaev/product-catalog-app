@@ -18,7 +18,7 @@ const MainPage = () => {
       </NavContainer>
       <ProductsField />
     </PageContainer>
-  )
+  );
 };
 
 export default MainPage;

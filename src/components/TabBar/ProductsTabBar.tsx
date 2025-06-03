@@ -3,7 +3,6 @@ import { TabsContainer, TabList, TabItem } from './styled';
 import { useProducts } from '@/context/ProductsContext';
 
 const ProductsTabBar = () => {
-
   const { activeCategory, setActiveCategory, categories } = useProducts();
 
   return (

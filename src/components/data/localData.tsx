@@ -1,12 +1,10 @@
-import { useProducts } from "@/context/ProductsContext";
-
 export type Product = {
-  id: string,
-  name: string,
-  url: string,
-  gender: string,
-  price: number,
-  category: string,
+  id: string;
+  name: string;
+  url: string;
+  gender: string;
+  price: number;
+  category: string;
 };
 
 export const productsList: Product[] = [

@@ -7,26 +7,26 @@ type CartItem = {
 };
 
 type ProductsContextType = {
-  activeCategory: string,
-  setActiveCategory: ((category: string) => void),
-  activeGender: string,
-  setActiveGender: ((gender: string) => void),
-  filteredProducts: Product[],
-  categories: string[],
-  genders: string[],
-  cartItems: CartItem[],
-  addToCart: ((productId: string) => void),
-  updateQuantity: ((productId: string, newQuantity: number) => void),
-  removeFromCart: ((productId: string) => void),
-  isCartOpen: boolean,
-  toggleCart: (() => void),
+  activeCategory: string;
+  setActiveCategory: (category: string) => void;
+  activeGender: string;
+  setActiveGender: (gender: string) => void;
+  filteredProducts: Product[];
+  categories: string[];
+  genders: string[];
+  cartItems: CartItem[];
+  addToCart: (productId: string) => void;
+  updateQuantity: (productId: string, newQuantity: number) => void;
+  removeFromCart: (productId: string) => void;
+  isCartOpen: boolean;
+  toggleCart: () => void;
 };
 
 const ProductsContext = createContext<ProductsContextType | undefined>(undefined);
 
 export const ProductsProvider: React.FC<{
-  products: Product[],
-  children: React.ReactNode,
+  products: Product[];
+  children: React.ReactNode;
 }> = ({ products, children }) => {
   const categories = ['all', ...Array.from(new Set(products.map((product) => product.category)))];
   const genders = ['all', 'male', 'female'];
@@ -46,9 +46,7 @@ export const ProductsProvider: React.FC<{
       const existingItem = prev.find((item) => item.productId === productId);
       if (existingItem) {
         return prev.map((item) =>
-          item.productId === productId 
-            ? { ...item, quantity: item.quantity + 1 } 
-            : item
+          item.productId === productId ? { ...item, quantity: item.quantity + 1 } : item,
         );
       }
       return [...prev, { productId: productId, quantity: 1 }];
@@ -61,12 +59,10 @@ export const ProductsProvider: React.FC<{
         return prev.filter((item) => item.productId !== productId);
       }
       return prev.map((item) =>
-        item.productId === productId 
-          ? { ...item, quantity: newQuantity } 
-          : item
+        item.productId === productId ? { ...item, quantity: newQuantity } : item,
       );
-    })
-  }
+    });
+  };
 
   const removeFromCart = (productId: string) => {
     setCartItems((prev) => {

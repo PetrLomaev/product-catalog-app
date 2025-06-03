@@ -4,7 +4,6 @@ import { CartIconWrapper, Badge } from './styled';
 import { useProducts } from '@/context/ProductsContext';
 
 export const CartIcon: React.FC = () => {
-
   const { cartItems, toggleCart } = useProducts();
 
   const totalQuantityInCart = cartItems.reduce((sum, cartItem) => {
