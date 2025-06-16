@@ -10,10 +10,11 @@ export const EmptyState = styled.div`
 export const ProductsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
+  gap: 25px;
+  padding-top: 20px;
+  max-width: 1440px;
+  margin: 0 auto;
   width: 100%;
-  padding: 20px;
-  box-sizing: border-box;
 `;
 
 export const ProductCardWrapper = styled.article`
@@ -22,7 +23,6 @@ export const ProductCardWrapper = styled.article`
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
   background: #fff;
-  transition: transform 0.2s ease;
 `;
 
 export const ProductImageContainer = styled.div`
@@ -55,66 +55,4 @@ export const ProductPrice = styled.p`
   font-size: 18px;
   font-weight: 700;
   color: #333;
-`;
-
-export const AddToCardButton = styled.button`
-  background: transparent;
-  border: 1px solid black;
-  border-radius: 10px;
-  color: black;
-  padding: 15px;
-  font-size: 18px;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  cursor: pointer;
-  justify-content: center;
-  width: 100%;
-
-  &:hover {
-    background: #676767;
-    color: #fff;
-    border-color: black;
-  }
-
-  &:active {
-    transform: scale(0.95);
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-`;
-
-export const RemoveFromCardButton = styled.button`
-  background: transparent;
-  border: 1px solid black;
-  border-radius: 10px;
-  color: black;
-  padding: 15px;
-  font-size: 18px;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  cursor: pointer;
-  justify-content: center;
-  width: 100%;
-
-  &:hover {
-    background: #676767;
-    color: #fff;
-    border-color: black;
-  }
-
-  &:active {
-    transform: scale(0.95);
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
 `;

@@ -1,9 +1,16 @@
 import styled from 'styled-components';
+import { FiShoppingCart } from 'react-icons/fi';
+
+export const FiShoppingCartStyled = styled(FiShoppingCart)`
+  width: 24px;
+  height: auto;
+`;
 
 export const CartIconWrapper = styled.div`
   position: relative;
   cursor: pointer;
   margin-left: auto;
+  margin-top: 0;
   padding: 8px;
   color: #333;
   transition: all 0.2s ease;

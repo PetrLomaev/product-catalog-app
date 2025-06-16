@@ -9,6 +9,11 @@ import {
   AddButton,
 } from './styled';
 
+const addToCartButtonText = 'Добавить в корзину';
+const removeFromCartButtonText = 'Удалить из корзины';
+const buttonDecreaseSymbol = '-';
+const buttonIncreaseSymbol = '+';
+
 type AddToCartButtonProps = {
   productId: string;
 };
@@ -36,14 +41,16 @@ const AddToCardButton = ({ productId }: AddToCartButtonProps) => {
   return quantity > 0 ? (
     <QuantityContainer>
       <QuantityControls>
-        <ControlButton onClick={handleRemove}>-</ControlButton>
+        <ControlButton onClick={handleRemove}>{buttonDecreaseSymbol}</ControlButton>
         <QuantityValue>{quantity}</QuantityValue>
-        <ControlButton onClick={handleAdd}>+</ControlButton>
+        <ControlButton onClick={handleAdd}>{buttonIncreaseSymbol}</ControlButton>
       </QuantityControls>
-      <RemoveButton onClick={() => removeFromCart(productId)}>Удалить из корзины</RemoveButton>
+      <RemoveButton onClick={() => removeFromCart(productId)}>
+        {removeFromCartButtonText}
+      </RemoveButton>
     </QuantityContainer>
   ) : (
-    <AddButton onClick={handleAdd}>Добавить в корзину</AddButton>
+    <AddButton onClick={handleAdd}>{addToCartButtonText}</AddButton>
   );
 };
 

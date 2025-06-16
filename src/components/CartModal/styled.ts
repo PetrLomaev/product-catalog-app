@@ -142,28 +142,6 @@ export const CartTotal = styled.div`
   margin-top: auto;
 `;
 
-export const CheckoutButton = styled.button`
-  background: #333;
-  color: white;
-  border: none;
-  padding: 12px;
-  font-size: 16px;
-  font-weight: 500;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-top: 20px;
-  transition: background 0.2s ease;
-
-  &:hover {
-    background: #444;
-  }
-
-  &:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-  }
-`;
-
 export const QuantityControls = styled.div`
   display: flex;
   align-items: center;

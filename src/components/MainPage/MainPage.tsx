@@ -2,15 +2,17 @@ import React from 'react';
 import ProductsTabBar from '../TabBar/ProductsTabBar';
 import ProductsField from '../ProductsField/ProductsField';
 import FilterField from '../FilterField/FilterField';
-import { Header, NavContainer, PageContainer } from './styled';
+import { PageContainer, NavContainer, Header } from './styled';
 import { CartIcon } from '../CartIcon/CartIcon';
+
+const headerText = 'Наши товары';
 
 const MainPage = () => {
   return (
     <PageContainer>
       <NavContainer>
         <Header>
-          <h1>Наши товары</h1>
+          <h1>{headerText}</h1>
           <CartIcon />
         </Header>
         <ProductsTabBar />

@@ -2,6 +2,10 @@ import React from 'react';
 import { useProducts } from '@/context/ProductsContext';
 import { FilterContainer, FilterButton } from './styled';
 
+const showAllGendersText = 'Показать все';
+const showMaleText = 'Показать мужское';
+const showFemaleText = 'Показать женское';
+
 const FilterField: React.FC = () => {
   const { activeGender, setActiveGender, genders } = useProducts();
 
@@ -14,10 +18,10 @@ const FilterField: React.FC = () => {
           onClick={() => setActiveGender(gender)}
         >
           {gender === 'all'
-            ? 'Показать все'
+            ? showAllGendersText
             : gender === 'male'
-              ? 'Показать мужское'
-              : 'Показать женское'}
+              ? showMaleText
+              : showFemaleText}
         </FilterButton>
       ))}
     </FilterContainer>

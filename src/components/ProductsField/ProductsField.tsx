@@ -13,6 +13,9 @@ import { useProducts } from '@/context/ProductsContext';
 import AddToCardButton from '../AddToCartButton/AddToCartButton';
 import type { Product } from '../data/localData';
 
+const productsNotFoundText = 'Товары не найдены';
+const rubleIcon = '₽';
+
 const ProductsField = () => {
   const { filteredProducts, categories, activeCategory } = useProducts();
 
@@ -32,10 +35,8 @@ const ProductsField = () => {
   const sortedProducts =
     activeCategory === 'all' ? getSortedProducts(filteredProducts, categories) : filteredProducts;
 
-  const rubleIcon = '₽';
-
   if (sortedProducts.length === 0) {
-    return <EmptyState>Товары не найдены</EmptyState>;
+    return <EmptyState>{productsNotFoundText}</EmptyState>;
   }
 
   return (

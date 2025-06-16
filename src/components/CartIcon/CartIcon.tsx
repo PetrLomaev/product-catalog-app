@@ -1,6 +1,5 @@
 import React from 'react';
-import { FiShoppingCart } from 'react-icons/fi';
-import { CartIconWrapper, Badge } from './styled';
+import { CartIconWrapper, Badge, FiShoppingCartStyled } from './styled';
 import { useProducts } from '@/context/ProductsContext';
 
 export const CartIcon: React.FC = () => {
@@ -12,7 +11,7 @@ export const CartIcon: React.FC = () => {
 
   return (
     <CartIconWrapper onClick={toggleCart}>
-      <FiShoppingCart size={24} />
+      <FiShoppingCartStyled />
       {totalQuantityInCart > 0 && <Badge>{totalQuantityInCart}</Badge>}
     </CartIconWrapper>
   );

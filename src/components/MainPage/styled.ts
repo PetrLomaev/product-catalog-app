@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const PageContainer = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 0;
   position: relative;
 `;
 
@@ -11,7 +11,7 @@ export const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 `;
 
 export const NavContainer = styled.div`
@@ -19,19 +19,7 @@ export const NavContainer = styled.div`
   top: 0px;
   padding: 1rem 2rem;
   z-index: 90;
-  background: white;
+  background-color: var(--background-color);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-`;
-
-export const TabsContainer = styled.div`
-  display: flex;
-  gap: 1rem;
-  padding: 1rem 2rem;
-  border-bottom: 1px solid #eee;
-`;
-
-export const FiltersContainer = styled.div`
-  display: flex;
-  gap: 1rem;
-  padding: 1rem 2rem;
+  border-radius: 12px;
 `;

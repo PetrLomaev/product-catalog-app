@@ -2,6 +2,8 @@ import React from 'react';
 import { TabsContainer, TabList, TabItem } from './styled';
 import { useProducts } from '@/context/ProductsContext';
 
+const allCategoriesText = 'Все категории';
+
 const ProductsTabBar = () => {
   const { activeCategory, setActiveCategory, categories } = useProducts();
 
@@ -14,7 +16,7 @@ const ProductsTabBar = () => {
             $isActiveTab={activeCategory === category}
             onClick={() => setActiveCategory(category)}
           >
-            {category === 'all' ? 'Все категории' : category}
+            {category === 'all' ? allCategoriesText : category}
           </TabItem>
         ))}
       </TabList>

@@ -19,6 +19,14 @@ import {
 import { type Product } from '../data/localData';
 import { useProducts } from '@/context/ProductsContext';
 
+const cartHeaderText = 'Корзина';
+const emptyCartText = 'Корзина пуста';
+const rubleIcon = '₽';
+const buttonDecreaseSymbol = '-';
+const buttonIncreaseSymbol = '+';
+const removeButtonText = 'Удалить';
+const totalText = 'Итого: ';
+
 const CartModal = () => {
   const { cartItems, filteredProducts, removeFromCart, isCartOpen, toggleCart, updateQuantity } =
     useProducts();
@@ -40,12 +48,12 @@ const CartModal = () => {
     <CartOverlay>
       <CartContainer>
         <CartHeader>
-          <h2>Корзина</h2>
+          <h2>{cartHeaderText}</h2>
           <CloseButton onClick={toggleCart}>×</CloseButton>
         </CartHeader>
         <CartItems>
           {cartItems.length === 0 ? (
-            <EmptyCart>Корзина пуста</EmptyCart>
+            <EmptyCart>{emptyCartText}</EmptyCart>
           ) : (
             cartItems.map((cartItem) => {
               const product = getProductById(cartItem.productId);
@@ -57,31 +65,33 @@ const CartModal = () => {
                   <ItemInfo>
                     <ItemName>{product.name}</ItemName>
                     <ItemPrice>
-                      {product.price} ₽ × {cartItem.quantity} ={product.price * cartItem.quantity} ₽
+                      {product.price} {rubleIcon} × {cartItem.quantity} ={' '}
+                      {product.price * cartItem.quantity} {rubleIcon}
                     </ItemPrice>
                     <QuantityControls>
                       <ControlButton
                         onClick={() => updateQuantity(cartItem.productId, cartItem.quantity - 1)}
                       >
-                        -
+                        {buttonDecreaseSymbol}
                       </ControlButton>
                       <ControlButton
                         onClick={() => updateQuantity(cartItem.productId, cartItem.quantity + 1)}
                       >
-                        +
+                        {buttonIncreaseSymbol}
                       </ControlButton>
                     </QuantityControls>
                   </ItemInfo>
                   <RemoveButton onClick={() => removeFromCart(cartItem.productId)}>
-                    Удалить
+                    {removeButtonText}
                   </RemoveButton>
                 </CartItem>
               );
             })
           )}
         </CartItems>
-
-        <CartTotal>Итого: {total} ₽</CartTotal>
+        <CartTotal>
+          {totalText} {total} {rubleIcon}
+        </CartTotal>
       </CartContainer>
     </CartOverlay>
   );

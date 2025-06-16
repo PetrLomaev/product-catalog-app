@@ -41,7 +41,8 @@ export const RemoveButton = styled.button`
   color: #ff3b30;
   font-size: 14px;
   cursor: pointer;
-  padding: 4px 8px;
+  padding: 0;
+  margin: 0;
   border-radius: 4px;
   transition: background-color 0.2s;
 
@@ -61,7 +62,7 @@ export const AddButton = styled.button`
   transition: background-color 0.3s;
   width: 100%;
   max-width: 200px;
-  margin: 0 auto;
+  margin: 10px auto;
   display: block;
 
   &:hover {
