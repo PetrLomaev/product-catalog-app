@@ -17,9 +17,9 @@ const productsNotFoundText = 'Товары не найдены';
 const rubleIcon = '₽';
 
 const ProductsField = () => {
-  const { filteredProducts, categories, activeCategory } = useProducts();
+  const { filteredAndSortedProducts, categories, activeCategory, activeSortOption } = useProducts();
 
-  const getSortedProducts = (products: Product[], categories: string[]) => {
+  const getSortedByCategoryProducts = (products: Product[], categories: string[]) => {
     const orderedCategories = categories.slice(1).reduce(
       (acc, category, index) => {
         acc[category] = index;
@@ -33,7 +33,9 @@ const ProductsField = () => {
   };
 
   const sortedProducts =
-    activeCategory === 'all' ? getSortedProducts(filteredProducts, categories) : filteredProducts;
+    activeCategory === 'all' && activeSortOption === 'not_sorted'
+      ? getSortedByCategoryProducts(filteredAndSortedProducts, categories)
+      : filteredAndSortedProducts;
 
   if (sortedProducts.length === 0) {
     return <EmptyState>{productsNotFoundText}</EmptyState>;

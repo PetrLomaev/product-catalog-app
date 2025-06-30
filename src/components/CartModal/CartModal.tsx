@@ -28,15 +28,21 @@ const removeButtonText = 'Удалить';
 const totalText = 'Итого: ';
 
 const CartModal = () => {
-  const { cartItems, filteredProducts, removeFromCart, isCartOpen, toggleCart, updateQuantity } =
-    useProducts();
+  const {
+    cartItems,
+    filteredAndSortedProducts,
+    removeFromCart,
+    isCartOpen,
+    toggleCart,
+    updateQuantity,
+  } = useProducts();
 
   if (!isCartOpen) {
     return null;
   }
 
   const getProductById = (productId: string): Product | undefined => {
-    return filteredProducts.find((product) => product.id === productId);
+    return filteredAndSortedProducts.find((product) => product.id === productId);
   };
 
   const total = cartItems.reduce((sum, cartItem) => {

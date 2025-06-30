@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useMemo, useState } from 'react';
 import type { Product } from '@/components/data/localData';
 
 type CartItem = {
@@ -11,7 +11,7 @@ type ProductsContextType = {
   setActiveCategory: (category: string) => void;
   activeGender: string;
   setActiveGender: (gender: string) => void;
-  filteredProducts: Product[];
+  filteredAndSortedProducts: Product[];
   categories: string[];
   genders: string[];
   cartItems: CartItem[];
@@ -20,6 +20,8 @@ type ProductsContextType = {
   removeFromCart: (productId: string) => void;
   isCartOpen: boolean;
   toggleCart: () => void;
+  activeSortOption: string;
+  setActiveSortOption: (sortOption: string) => void;
 };
 
 const ProductsContext = createContext<ProductsContextType | undefined>(undefined);
@@ -34,12 +36,26 @@ export const ProductsProvider: React.FC<{
   const [activeGender, setActiveGender] = useState<string>('all');
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
+  const [activeSortOption, setActiveSortOption] = useState('not_sorted');
 
-  const filteredProducts = products.filter((product) => {
-    const isCategoryMatch = activeCategory === 'all' || product.category === activeCategory;
-    const isGenderMatch = activeGender === 'all' || product.gender === activeGender;
-    return isCategoryMatch && isGenderMatch;
-  });
+  const filteredAndSortedProducts = useMemo(() => {
+    let filtered = products.filter((product) => {
+      const isCategoryMatch = activeCategory === 'all' || product.category === activeCategory;
+      const isGenderMatch = activeGender === 'all' || product.gender === activeGender;
+      return isCategoryMatch && isGenderMatch;
+    });
+
+    if (activeSortOption === 'cheaper_first') {
+      filtered = [...filtered].sort((a, b) => {
+        return a.price - b.price;
+      });
+    } else if (activeSortOption === 'expensive_first') {
+      filtered = [...filtered].sort((a, b) => {
+        return b.price - a.price;
+      });
+    }
+    return filtered;
+  }, [products, activeCategory, activeGender, activeSortOption]);
 
   const addToCart = (productId: string) => {
     setCartItems((prev) => {
@@ -79,7 +95,7 @@ export const ProductsProvider: React.FC<{
         setActiveCategory,
         activeGender,
         setActiveGender,
-        filteredProducts,
+        filteredAndSortedProducts,
         categories,
         genders,
         cartItems,
@@ -88,6 +104,8 @@ export const ProductsProvider: React.FC<{
         removeFromCart,
         isCartOpen,
         toggleCart,
+        activeSortOption,
+        setActiveSortOption,
       }}
     >
       {children}

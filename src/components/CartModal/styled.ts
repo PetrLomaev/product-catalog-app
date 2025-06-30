@@ -1,4 +1,13 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
 
 export const CartOverlay = styled.div`
   position: fixed;
@@ -10,7 +19,7 @@ export const CartOverlay = styled.div`
   z-index: 1000;
   display: flex;
   justify-content: flex-end;
-  animation: fadeIn 0.3s ease;
+  animation: ${fadeIn} 0.3s ease;
 `;
 
 export const CartContainer = styled.div`
@@ -21,9 +30,7 @@ export const CartContainer = styled.div`
   padding: 20px;
   display: flex;
   flex-direction: column;
-  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
-  transform: translateX(0);
-  transition: transform 0.3s ease;
+  height: 100%;
 
   @media (max-width: 480px) {
     width: 100%;
@@ -64,7 +71,7 @@ export const CartItems = styled.div`
   flex: 1;
   overflow-y: auto;
   padding-right: 10px;
-  margin-bottom: 20px;
+  padding-bottom: 20px;
 
   &::-webkit-scrollbar {
     width: 6px;
@@ -139,7 +146,12 @@ export const CartTotal = styled.div`
   font-size: 18px;
   font-weight: 600;
   text-align: right;
+  position: absolute;
   margin-top: auto;
+  position: sticky;
+  bottom: 0;
+  background: white;
+  z-index: 10;
 `;
 
 export const QuantityControls = styled.div`

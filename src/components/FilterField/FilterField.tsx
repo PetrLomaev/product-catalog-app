@@ -1,6 +1,7 @@
 import React from 'react';
 import { useProducts } from '@/context/ProductsContext';
 import { FilterContainer, FilterButton } from './styled';
+import SortDropdown from '../SortDropdown/SortDropdown';
 
 const showAllGendersText = 'Показать все';
 const showMaleText = 'Показать мужское';
@@ -24,6 +25,7 @@ const FilterField: React.FC = () => {
               : showFemaleText}
         </FilterButton>
       ))}
+      <SortDropdown />
     </FilterContainer>
   );
 };
