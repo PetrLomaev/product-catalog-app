@@ -35,7 +35,7 @@ export const DropdownItem = styled.button`
 
 export const SortButton = styled.button`
   min-width: 160px;
-  padding: 8px 30px;
+  padding: 8px 16px;
   background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
