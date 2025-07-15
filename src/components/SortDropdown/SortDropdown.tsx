@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useProducts } from '@/context/ProductsContext';
-import { DropdownContent, DropdownItem, SortButton, SortContainer } from './styled';
+import { SortContainer, SortButton, DropdownContent, DropdownItem } from './styled';
+import useClickOutside from '@/hooks/useClickOutside';
 
 const showFirstText = 'Показать сначала';
 const notSortedText = 'Без сортировки';
@@ -8,37 +9,45 @@ const cheaperFirstText = 'Дешевле';
 const expensiveFirstText = 'Дороже';
 
 const SortDropdown = () => {
-  const { activeSortOption, setActiveSortOption } = useProducts();
+  const { activeSortOption, setActiveSortOption, sortOptions } = useProducts();
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleSort = (option: string) => {
-    setActiveSortOption(option);
-    setIsOpen(false);
+  const dropdownRef = useClickOutside<HTMLDivElement>(() => setIsOpen(false));
+
+  const handleSort = useCallback(
+    (option: string) => {
+      setActiveSortOption(option);
+      setIsOpen(false);
+    },
+    [setActiveSortOption],
+  );
+
+  const showFirstButtonText = (o: string) => {
+    if (o === 'not_sorted') {
+      return notSortedText;
+    }
+    if (o === 'cheaper_first') {
+      return cheaperFirstText;
+    }
+    if (o === 'expensive_first') {
+      return expensiveFirstText;
+    }
   };
 
   return (
-    <SortContainer>
+    <SortContainer ref={dropdownRef}>
       <SortButton onClick={() => setIsOpen(!isOpen)}>{showFirstText}</SortButton>
       {isOpen && (
         <DropdownContent>
-          <DropdownItem
-            onClick={() => handleSort('not_sorted')}
-            className={activeSortOption === 'not_sorted' ? 'active' : ''}
-          >
-            {notSortedText}
-          </DropdownItem>
-          <DropdownItem
-            onClick={() => handleSort('cheaper_first')}
-            className={activeSortOption === 'cheaper_first' ? 'active' : ''}
-          >
-            {cheaperFirstText}
-          </DropdownItem>
-          <DropdownItem
-            onClick={() => handleSort('expensive_first')}
-            className={activeSortOption === 'expensive_first' ? 'active' : ''}
-          >
-            {expensiveFirstText}
-          </DropdownItem>
+          {sortOptions.map((opt) => (
+            <DropdownItem
+              key={opt}
+              onClick={() => handleSort(opt)}
+              $active={opt === activeSortOption}
+            >
+              {showFirstButtonText(opt)}
+            </DropdownItem>
+          ))}
         </DropdownContent>
       )}
     </SortContainer>

@@ -7,13 +7,17 @@ export const SortContainer = styled.div`
 `;
 
 export const SortButton = styled.button`
+  min-width: 180px;
+  width: auto;
+  max-width: 100%;
   padding: 8px 16px;
   background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
-  display: flex;
+  display: inline-flex;
+  justify-content: space-between;
   align-items: center;
 
   &:hover {
@@ -30,7 +34,9 @@ export const SortButton = styled.button`
 export const DropdownContent = styled.div`
   position: absolute;
   background-color: white;
-  min-width: 160px;
+  min-width: 180px;
+  width: 100%;
+  box-sizing: border-box;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   border-radius: 4px;
@@ -40,22 +46,17 @@ export const DropdownContent = styled.div`
   margin-top: 5px;
 `;
 
-export const DropdownItem = styled.button`
+export const DropdownItem = styled.button<{ $active?: boolean }>`
   display: block;
   width: 100%;
   padding: 10px 16px;
   text-align: left;
-  background: white;
+  background: ${({ $active }) => ($active ? '#007bff' : 'white')};
   border: none;
   cursor: pointer;
   font-size: 14px;
 
   &:hover {
-    background-color: #f1f1f1;
-  }
-
-  &.active {
-    background-color: #007bff;
-    color: white;
+    background-color: #45a4ed;
   }
 `;

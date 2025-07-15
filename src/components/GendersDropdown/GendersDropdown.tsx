@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useProducts } from '@/context/ProductsContext';
-import { DropdownContent, DropdownItem, SortButton, SortContainer } from './styled';
+import { SortContainer, SortButton, DropdownContent, DropdownItem } from './styled';
+import useClickOutside from '@/hooks/useClickOutside';
 
 const showAllGendersText = 'Показать все';
 const showMaleText = 'Показать мужское';
@@ -10,10 +11,15 @@ const GendersDropdown: React.FC = () => {
   const { activeGender, setActiveGender, genders } = useProducts();
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleFilter = (option: string) => {
-    setActiveGender(option);
-    setIsOpen(false);
-  };
+  const dropdownRef = useClickOutside<HTMLDivElement>(() => setIsOpen(false));
+
+  const handleFilter = useCallback(
+    (option: string) => {
+      setActiveGender(option);
+      setIsOpen(false);
+    },
+    [setActiveGender],
+  );
 
   const currentGenderButtonText = () => {
     if (activeGender === 'all') {
@@ -40,7 +46,7 @@ const GendersDropdown: React.FC = () => {
   };
 
   return (
-    <SortContainer>
+    <SortContainer ref={dropdownRef}>
       <SortButton onClick={() => setIsOpen(!isOpen)}>{currentGenderButtonText()}</SortButton>
       {isOpen && (
         <DropdownContent>
@@ -48,7 +54,7 @@ const GendersDropdown: React.FC = () => {
             <DropdownItem
               key={gender}
               onClick={() => handleFilter(gender)}
-              className={gender === activeGender ? 'active' : ''}
+              $active={gender === activeGender}
             >
               {showGenderText(gender)}
             </DropdownItem>

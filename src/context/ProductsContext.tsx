@@ -22,6 +22,7 @@ type ProductsContextType = {
   toggleCart: () => void;
   activeSortOption: string;
   setActiveSortOption: (sortOption: string) => void;
+  sortOptions: string[];
 };
 
 const ProductsContext = createContext<ProductsContextType | undefined>(undefined);
@@ -32,6 +33,7 @@ export const ProductsProvider: React.FC<{
 }> = ({ products, children }) => {
   const categories = ['all', ...Array.from(new Set(products.map((product) => product.category)))];
   const genders = ['all', 'male', 'female'];
+  const sortOptions = ['not_sorted', 'cheaper_first', 'expensive_first'];
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [activeGender, setActiveGender] = useState<string>('all');
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -106,6 +108,7 @@ export const ProductsProvider: React.FC<{
         toggleCart,
         activeSortOption,
         setActiveSortOption,
+        sortOptions,
       }}
     >
       {children}
